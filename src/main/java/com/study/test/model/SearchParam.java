@@ -1,3 +1,4 @@
+package com.study.test.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
