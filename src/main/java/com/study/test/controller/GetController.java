@@ -1,5 +1,7 @@
 package com.study.test.controller;
 
+import com.study.test.model.SearchParam;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,5 +28,14 @@ public class GetController {
     }
 
     // localhost:8080/api/multiParameter?account=abcd&email=study@gmail.com&page=10
+
+    @GetMapping("/getMultiParameter")
+    public SearchParam getMultiParameter(SearchParam searchParam) {
+        System.out.println(searchParam.getAccount());
+        System.out.println(searchParam.getEmail());
+        System.out.println(searchParam.getPage());
+
+        return searchParam;
+    }
 
 }
