@@ -6,8 +6,12 @@ import java.util.Optional;
 import com.study.test.TestApplicationTests;
 import com.study.test.model.entity.User;
 
+import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assert;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 public class UserRepositoryTest extends TestApplicationTests {
 
@@ -53,7 +57,25 @@ public class UserRepositoryTest extends TestApplicationTests {
 
     }
 
+    @Test
+    @Transactional
     public void delete() {
+        Optional<User> user = userRepository.findById(3L);
 
+        Assertions.assertTrue(user.isPresent()); // true
+
+        user.ifPresent(selectUser -> {
+            userRepository.delete(selectUser);
+        });
+
+        Optional<User> deleteUser = userRepository.findById(3L);
+
+        Assertions.assertFalse(deleteUser.isPresent()); // false
+
+        // if (deleteUser.isPresent()) {
+        // System.out.println("데이터 존재 : " + deleteUser.get());
+        // } else {
+        // System.out.println("데이터 삭제 , 데이터 없음");
+        // }
     }
 }
