@@ -30,6 +30,19 @@ public class Item {
     private String content;
 
     // 1 : N
+    // LAZY = 지연로딩, EAGER = 즉시로딩
+
+    // LAZY = SELECT * FROM item where id = ?
+
+    // 연관관계설정된 모든 테이블에 대해 조인이 일어남.
+    // EAGER는 그래서 성능저하가 있을 수도 있고, 상실이 있을 수 있음.
+    // EAGER는 한건만 존재할 때 추천. 1:1
+
+    // EAGER = 1:1
+    // item_id = order_detail.item_id
+    // user_id = order_detail.user_id
+    // wher item.id = ?
+    // JOIN item ~~
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
     private List<OrderDetail> orderDetailList;
 }
