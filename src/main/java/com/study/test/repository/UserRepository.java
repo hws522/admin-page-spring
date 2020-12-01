@@ -1,7 +1,5 @@
 package com.study.test.repository;
 
-import java.util.Optional;
-
 import com.study.test.model.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
