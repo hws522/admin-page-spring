@@ -1,26 +1,23 @@
 package com.study.test.model.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity // order_detail
-// @ToString(exclude = { "user", "item" }) // user, item 변수 제외시킴. 서로 상호참조하고 있는
-// 부분 제외 시켜주지 않으면 오버플로우 생김.
-public class OrderDetail {
+@AllArgsConstructor
+@Data
+@Entity
+public class OrderGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +25,21 @@ public class OrderDetail {
 
     private String status;
 
-    private LocalDateTime arrivalDate;
+    private String orderType; // 주문의 형태 일괄/개별
 
-    private Integer quantity;
+    private String revAddress;
+
+    private String revName;
+
+    private String paymentType; // 카드 /현금
 
     private BigDecimal totalPrice;
+
+    private Integer totalQuantity;
+
+    private LocalDateTime orderAt;
+
+    private LocalDateTime arrivalDate;
 
     private LocalDateTime createdAt;
 
@@ -41,5 +48,4 @@ public class OrderDetail {
     private LocalDateTime updatedAt;
 
     private String updatedBy;
-
 }

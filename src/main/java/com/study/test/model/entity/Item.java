@@ -1,5 +1,6 @@
 package com.study.test.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,11 +24,29 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String status;
+
     private String name;
+
+    private String title;
 
     private Integer price;
 
     private String content;
+
+    private String brandName;
+
+    private LocalDateTime registeredAt;
+
+    private LocalDateTime unregisteredAt;
+
+    private LocalDateTime createdAt;
+
+    private String createdBy;
+
+    private LocalDateTime updatedAt;
+
+    private String updatedBy;
 
     // 1 : N
     // LAZY = 지연로딩, EAGER = 즉시로딩
@@ -43,6 +62,4 @@ public class Item {
     // user_id = order_detail.user_id
     // wher item.id = ?
     // JOIN item ~~
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-    private List<OrderDetail> orderDetailList;
 }
