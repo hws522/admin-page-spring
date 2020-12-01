@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity // order_detail
 // @ToString(exclude = { "user", "item" }) // user, item 변수 제외시킴. 서로 상호참조하고 있는
 // 부분 제외 시켜주지 않으면 오버플로우 생김.
+@ToString(exclude = { "orderGroup", "item" })
 public class OrderDetail {
 
     @Id
@@ -39,8 +43,12 @@ public class OrderDetail {
 
     private String updatedBy;
 
-    private Long itemId;
+    // OrderDetail N : 1 Item
+    @ManyToOne
+    private Item item;
 
-    private Long orderGroupId;
+    // OrderDetail N : 1 OrderGroup
+    @ManyToOne
+    private OrderGroup orderGroup;
 
 }

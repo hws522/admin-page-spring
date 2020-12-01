@@ -1,19 +1,25 @@
 package com.study.test.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-// @Table(name = "user")
+@ToString(exclude = { "orderGroup" })
 public class User {
 
     @Id
@@ -41,4 +47,8 @@ public class User {
     private LocalDateTime updatedAt;
 
     private String updatedBy;
+
+    // User 1 : N OrderGroup
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<OrderGroup> orderGroupList;
 }

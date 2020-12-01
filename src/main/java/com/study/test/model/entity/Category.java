@@ -1,20 +1,25 @@
 package com.study.test.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
+@ToString(exclude = { "partnerList" })
 public class Category {
 
     @Id
@@ -32,4 +37,8 @@ public class Category {
     private LocalDateTime updatedAt;
 
     private String updatedBy;
+
+    // Category 1 : N Partner
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    private List<Partner> partnerList;
 }

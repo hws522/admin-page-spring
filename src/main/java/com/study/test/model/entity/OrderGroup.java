@@ -2,20 +2,26 @@ package com.study.test.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
+@ToString(exclude = { "user", "OrderDetailList" })
 public class OrderGroup {
 
     @Id
@@ -48,5 +54,11 @@ public class OrderGroup {
 
     private String updatedBy;
 
-    private Long userId;
+    // OrderGroup N : 1 User
+    @ManyToOne
+    private User user;
+
+    // OrderGroup 1 : N OrderDetail
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderGroup")
+    private List<OrderDetail> OrderDetailList;
 }
