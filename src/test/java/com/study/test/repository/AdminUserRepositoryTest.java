@@ -1,6 +1,5 @@
 package com.study.test.repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.study.test.TestApplicationTests;

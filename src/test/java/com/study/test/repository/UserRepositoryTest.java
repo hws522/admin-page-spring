@@ -4,16 +4,12 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import com.study.test.TestApplicationTests;
-import com.study.test.model.entity.Item;
 import com.study.test.model.entity.User;
 
 import org.junit.jupiter.api.Assertions;
-import org.assertj.core.api.Assert;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.xmlunit.diff.Comparison.Detail;
 
 public class UserRepositoryTest extends TestApplicationTests {
 
