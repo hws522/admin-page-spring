@@ -40,6 +40,8 @@ public class UserRepositoryTest extends TestApplicationTests {
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);
 
+        User u = User.builder().account(account).password(password).status(status).email(email).build();
+
         User newUser = userRepository.save(user);
 
         Assertions.assertNotNull(newUser);

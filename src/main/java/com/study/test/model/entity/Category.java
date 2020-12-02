@@ -18,9 +18,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,6 +30,8 @@ import lombok.ToString;
 @Entity
 @ToString(exclude = { "partnerList" })
 @EntityListeners(AuditingEntityListener.class)
+@Builder
+@Accessors(chain = true)
 public class Category {
 
     @Id

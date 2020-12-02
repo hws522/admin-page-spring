@@ -18,9 +18,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @Data
 @AllArgsConstructor
@@ -28,6 +30,8 @@ import lombok.ToString;
 @Entity
 @ToString(exclude = { "orderGroupList" })
 @EntityListeners(AuditingEntityListener.class)
+@Builder // .() 쉽게 생성.
+@Accessors(chain = true) // update할 때 , .() 연결로 쉽게.
 public class User {
 
     @Id
