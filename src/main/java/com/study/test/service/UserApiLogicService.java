@@ -49,14 +49,33 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
     @Override
     public Header<UserApiResponse> update(Header<UserApiRequest> request) {
-        // TODO Auto-generated method stub
-        return null;
+        // data
+        UserApiRequest userApiRequest = request.getData();
+
+        // id -> user data
+        Optional<User> optional = userRepository.findById(userApiRequest.getId());
+
+        return optional.map(user -> {
+            // update
+            user.setAccount(userApiRequest.getAccount()).setPassword(userApiRequest.getPassword())
+                    .setStatus(userApiRequest.getStatus()).setPhoneNumber(userApiRequest.getPhoneNumber())
+                    .setEmail(userApiRequest.getEmail()).setRegisteredAt(userApiRequest.getRegisteredAt())
+                    .setUnregisteredAt(userApiRequest.getUnregisteredAt());
+
+            return user;
+        }).map(user -> userRepository.save(user)).map(user -> response(user)).orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
     @Override
     public Header delete(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        Optional<User> optional = userRepository.findById(id);
+
+        return optional.map(user -> {
+            userRepository.delete(user);
+
+            return Header.OK();
+        }).orElseGet(() -> Header.ERROR("데이터 없음"));
+
     }
 
     private Header<UserApiResponse> response(User user) {
@@ -64,7 +83,8 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
         UserApiResponse userApiResponse = UserApiResponse.builder().id(user.getId()).account(user.getAccount())
                 .password(user.getPassword()).email(user.getEmail()).phoneNumber(user.getPhoneNumber())
-                .registeredAt(user.getRegisteredAt()).unregisteredAt(user.getUnregisteredAt()).build();
+                .status(user.getStatus()).registeredAt(user.getRegisteredAt()).unregisteredAt(user.getUnregisteredAt())
+                .build();
 
         // Header + data return
 
