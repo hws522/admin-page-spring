@@ -1,6 +1,7 @@
 package com.study.test.controller;
 
 import com.study.test.model.SearchParam;
+import com.study.test.model.network.Header;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,4 +39,10 @@ public class GetController {
         return searchParam;
     }
 
+    @GetMapping("/header")
+    public Header getHeader() {
+
+        // {"resultCode: "OK", "description": "OK"}
+        return Header.builder().resultCode("OK").description("OK").build();
+    }
 }
