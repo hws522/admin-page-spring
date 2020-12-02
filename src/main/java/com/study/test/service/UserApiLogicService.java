@@ -1,6 +1,7 @@
 package com.study.test.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import com.study.test.ifs.CrudInterface;
 import com.study.test.model.entity.User;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class UserApiLogicService implements CrudInterface<UserApiRequest, UserApiResponse> {
 
     @Autowired
-    private UserRepository UserRepository;
+    private UserRepository userRepository;
 
     // 1. request data
     // 2. user 생성
@@ -33,7 +34,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
                 .status("REGISTERED").phoneNumber(userApiRequest.getPhoneNumber()).email(userApiRequest.getEmail())
                 .registeredAt(LocalDateTime.now()).build();
 
-        User newUser = UserRepository.save(user);
+        User newUser = userRepository.save(user);
 
         // 3. 생성된 데이터 => userApiResponse return
         return response(newUser);
@@ -41,8 +42,9 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
     @Override
     public Header<UserApiResponse> read(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        // id -> repository getOne , getById
+        return userRepository.findById(id) // user -> userApiResponse return
+                .map(user -> response(user)).orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
     @Override
