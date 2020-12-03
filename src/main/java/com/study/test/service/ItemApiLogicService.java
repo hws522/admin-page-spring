@@ -14,13 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemApiResponse> {
+public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResponse, Item> {
 
     @Autowired
     private PartnerRepository partnerRepository;
-
-    @Autowired
-    private ItemRepository itemRepository;
 
     @Override
     public Header<ItemApiResponse> create(Header<ItemApiRequest> request) {
@@ -31,14 +28,14 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
                 .content(body.getContent()).price(body.getPrice()).brandName(body.getBrandName())
                 .registeredAt(LocalDateTime.now()).partner(partnerRepository.getOne(body.getPartnerId())).build();
 
-        Item newItem = itemRepository.save(item);
+        Item newItem = baseRepository.save(item);
 
         return response(newItem);
     }
 
     @Override
     public Header<ItemApiResponse> read(Long id) {
-        return itemRepository.findById(id).map(item -> response(item)).orElseGet(() -> Header.ERROR("데이터 없음"));
+        return baseRepository.findById(id).map(item -> response(item)).orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
     @Override
@@ -46,13 +43,13 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
 
         ItemApiRequest body = request.getData();
 
-        return itemRepository.findById(body.getId()).map(entityItem -> {
+        return baseRepository.findById(body.getId()).map(entityItem -> {
             entityItem.setStatus(body.getStatus()).setName(body.getName()).setTitle(body.getTitle())
                     .setContent(body.getContent()).setPrice(body.getPrice()).setBrandName(body.getBrandName())
                     .setRegisteredAt(body.getRegisteredAt()).setUnregisteredAt(body.getUnregisteredAt());
 
             return entityItem;
-        }).map(newEntityItem -> itemRepository.save(newEntityItem)).map(item -> response(item))
+        }).map(newEntityItem -> baseRepository.save(newEntityItem)).map(item -> response(item))
                 .orElseGet(() -> Header.ERROR("데이터 없음"));
 
     }
@@ -60,8 +57,8 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
     @Override
     public Header delete(Long id) {
 
-        return itemRepository.findById(id).map(item -> {
-            itemRepository.delete(item);
+        return baseRepository.findById(id).map(item -> {
+            baseRepository.delete(item);
 
             return Header.OK();
         }).orElseGet(() -> Header.ERROR("데이터 없음"));
