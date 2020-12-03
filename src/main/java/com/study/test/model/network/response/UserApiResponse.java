@@ -2,6 +2,8 @@ package com.study.test.model.network.response;
 
 import java.time.LocalDateTime;
 
+import com.study.test.model.enumclass.UserStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +21,7 @@ public class UserApiResponse {
 
     private String password;
 
-    private String status;
+    private UserStatus status;
 
     private String email;
 

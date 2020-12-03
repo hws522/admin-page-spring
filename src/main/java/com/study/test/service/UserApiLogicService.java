@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.study.test.ifs.CrudInterface;
 import com.study.test.model.entity.User;
+import com.study.test.model.enumclass.UserStatus;
 import com.study.test.model.network.Header;
 import com.study.test.model.network.request.UserApiRequest;
 import com.study.test.model.network.response.UserApiResponse;
@@ -31,8 +32,8 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
         // 2. User 생성
         User user = User.builder().account(userApiRequest.getAccount()).password(userApiRequest.getPassword())
-                .status("REGISTERED").phoneNumber(userApiRequest.getPhoneNumber()).email(userApiRequest.getEmail())
-                .registeredAt(LocalDateTime.now()).build();
+                .status(UserStatus.REGISTERED).phoneNumber(userApiRequest.getPhoneNumber())
+                .email(userApiRequest.getEmail()).registeredAt(LocalDateTime.now()).build();
 
         User newUser = userRepository.save(user);
 

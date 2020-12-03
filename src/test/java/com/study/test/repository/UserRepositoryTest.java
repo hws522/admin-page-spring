@@ -35,12 +35,13 @@ public class UserRepositoryTest extends TestApplicationTests {
         User user = new User();
         user.setAccount(account);
         user.setPassword(password);
-        user.setStatus(status);
+        // user.setStatus(status);
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);
 
-        User u = User.builder().account(account).password(password).status(status).email(email).build();
+        // User u =
+        // User.builder().account(account).password(password).status(status).email(email).build();
 
         User newUser = userRepository.save(user);
 

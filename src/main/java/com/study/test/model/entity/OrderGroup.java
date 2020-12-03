@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.study.test.model.enumclass.OrderType;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -42,7 +46,8 @@ public class OrderGroup {
 
     private String status;
 
-    private String orderType; // 주문의 형태 일괄/개별
+    @Enumerated(EnumType.STRING)
+    private OrderType orderType; // 주문의 형태 일괄/개별
 
     private String revAddress;
 

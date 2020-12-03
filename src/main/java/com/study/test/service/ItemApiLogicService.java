@@ -69,6 +69,7 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
     }
 
     private Header<ItemApiResponse> response(Item item) {
+
         ItemApiResponse body = ItemApiResponse.builder().id(item.getId()).status(item.getStatus()).name(item.getName())
                 .title(item.getTitle()).content(item.getContent()).price(item.getPrice()).brandName(item.getBrandName())
                 .registeredAt(item.getRegisteredAt()).unregisteredAt(item.getUnregisteredAt())
