@@ -21,24 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemApiController implements CrudInterface<ItemApiRequest, ItemApiResponse> {
 
     @Autowired
-    private ItemApiLogicService ItemApiLogicService;
+    private ItemApiLogicService itemApiLogicService;
 
     @Override
     @PostMapping("") // /api/item
     public Header<ItemApiResponse> create(@RequestBody Header<ItemApiRequest> request) {
-        return ItemApiLogicService.create(request);
+        return itemApiLogicService.create(request);
     }
 
     @Override
     @GetMapping("{id}") // /api/item/1 ... 1000
     public Header<ItemApiResponse> read(@PathVariable Long id) {
-        return null;
+        return itemApiLogicService.read(id);
     }
 
     @Override
     @PutMapping("") // /api/item
     public Header<ItemApiResponse> update(@RequestBody Header<ItemApiRequest> request) {
-        return null;
+        return itemApiLogicService.update(request);
     }
 
     @Override
