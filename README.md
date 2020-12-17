@@ -1,11 +1,13 @@
 # admin_page
+
 spring boot 를 이용하여 어드민페이지를 구현했습니다.
+
+---
 
 ### screen
 
 <img src="https://user-images.githubusercontent.com/59306143/101287287-b7512200-3832-11eb-810d-44ca980352bc.gif" alt="제목-없음-6" width="600" height="400"/>
 
----
 ### explanation
 
 - 스프링에 컨트롤러로 활용할 것이라는 것을 알리기 위해 @RestController,
