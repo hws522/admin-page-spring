@@ -1,4 +1,4 @@
-# admin_page
+# Create admin_page
 
 spring boot 를 이용하여 어드민페이지를 구현했습니다.
 
